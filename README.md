@@ -1,1 +1,3 @@
 # seidlrechner
+
+Just for fun.
