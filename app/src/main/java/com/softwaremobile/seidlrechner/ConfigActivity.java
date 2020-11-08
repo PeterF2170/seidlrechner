@@ -23,7 +23,6 @@ public class ConfigActivity extends AppCompatActivity {
     TextView textView_item_name, textView_item_einheit;
     Button button_add_item;
     LinearLayout linearLayout_items;
-    String buttonText;
     EditText input;
 
 
