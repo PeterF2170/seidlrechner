@@ -1,7 +1,6 @@
 package com.softwaremobile.seidlrechner;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
@@ -30,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Iterator<Map.Entry<String, String>> entries;
     Iterator<Map.Entry<String, String>> entries_nach;
     DecimalFormat df = new DecimalFormat("#.##");
-    EditText input;
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -65,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         textView_nach.setText(einheiten.get(einheit_nach));
         textView_von.setText(einheiten.get(einheit));
 
-
         calc();
 
         button_calc.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 calc();
             }
         });
-
 
         button_plus.setOnClickListener(new View.OnClickListener() {
             @Override

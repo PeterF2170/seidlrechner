@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ConfigActivity extends AppCompatActivity {
@@ -24,8 +23,6 @@ public class ConfigActivity extends AppCompatActivity {
     Button button_add_item;
     LinearLayout linearLayout_items;
     EditText input;
-
-
     HashMap<String, String> einheiten_all;
 
     @Override
@@ -55,8 +52,6 @@ public class ConfigActivity extends AppCompatActivity {
 
         HashMap<String, String> map = getAll();
         System.out.println(map);
-
-
         linearLayout_items = findViewById(R.id.linearlayout_items);
 
         for (final HashMap.Entry<String, String> entry : map.entrySet()) {
