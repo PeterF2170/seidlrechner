@@ -1,25 +1,18 @@
 package com.softwaremobile.seidlrechner;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.util.StringUtil;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -31,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textView_von, textView_nach;
     EditText edit_von, edit_nach;
     Button button_calc, button_plus, button_minus, button_change, button_change_nach;
-    float von = 1.0f, cur_nach, total_lt = 0.0f;
+    float von = 1.0f, total_lt = 0.0f;
     String einheit, einheit_nach;
     public static HashMap<String, String> einheiten;
     Iterator<Map.Entry<String, String>> entries;
@@ -57,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         edit_nach.setText(String.valueOf(einheit_nach));
 
         einheiten = getAll();
-        if(einheiten.isEmpty()){
-            einheiten.put("1.0f","Liter");
+        if (einheiten.isEmpty()) {
+            einheiten.put("1.0f", "Liter");
         }
 
         entries = einheiten.entrySet().iterator();
@@ -74,39 +67,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         calc();
-
-        textView_von.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Title");
-
-                View customLayout = getLayoutInflater().inflate(R.layout.dialog, null);
-                input = customLayout.findViewById(R.id.editText_dialog);
-                String s = textView_von.getText().toString();
-                input.setText(s);
-                builder.setView(customLayout);
-
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        einheiten.replace(String.valueOf(einheit), input.getText().toString());
-                        updateSp(einheit, input.getText().toString());
-                        textView_von.setText(input.getText().toString());
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-                builder.show();
-            }
-
-        });
-
 
         button_calc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,11 +141,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void calc() {
-
         von = getVon();
         total_lt = von * Float.parseFloat(einheit);
         edit_nach.setText(df.format(total_lt / Float.parseFloat(einheit_nach)));
-
     }
 
     public float getVon() {
@@ -194,16 +152,9 @@ public class MainActivity extends AppCompatActivity {
         else return 0.0f;
     }
 
-    public void updateSp(String updateEinheit, String updateValue) {
-        SharedPreferences prefs = getSharedPreferences("Bier",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(String.valueOf(updateEinheit), updateValue);
-        editor.apply();
-    }
-
 
     public void mapIntoSp(HashMap<Float, String> map) {
-        SharedPreferences prefs = getSharedPreferences("Bier",Context.MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("Bier", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         for (HashMap.Entry<Float, String> entry : map.entrySet()) {
             editor.putString(String.valueOf(entry.getKey()), entry.getValue());
@@ -212,13 +163,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public HashMap<String, String> getAll() {
-        SharedPreferences prefs = getSharedPreferences("Bier",Context.MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("Bier", Context.MODE_PRIVATE);
         return (HashMap<String, String>) new HashMap(prefs.getAll());
     }
 
-    public void toConfig(View view){
-        Intent i = new Intent(MainActivity.this,ConfigActivity.class);
+    public void toConfig(View view) {
+        Intent i = new Intent(MainActivity.this, ConfigActivity.class);
         startActivity(i);
     }
-
 }
