@@ -19,6 +19,7 @@
 
     <Button
         android:id="@+id/button_calc"
+        style="@style/Theme.Seidlrechner.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="162dp"
@@ -32,12 +33,14 @@
 
     <EditText
         android:id="@+id/editText_von"
+        style="@style/Theme.Seidlrechner.EditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="128dp"
         android:ems="10"
         android:inputType="numberDecimal"
         android:textAlignment="center"
+        android:textColor="@color/colorText"
         app:layout_constraintEnd_toStartOf="@+id/button_minus"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +48,7 @@
 
     <EditText
         android:id="@+id/editText_nach"
+        style="@style/Theme.Seidlrechner.EditText"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -70,6 +74,7 @@
 
     <Button
         android:id="@+id/button_minus"
+        style="@style/Theme.Seidlrechner.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="125dp"
@@ -81,6 +86,7 @@
 
     <Button
         android:id="@+id/button_plus"
+        style="@style/Theme.Seidlrechner.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -92,6 +98,7 @@
 
     <Button
         android:id="@+id/button_change"
+        style="@style/Theme.Seidlrechner.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -103,6 +110,7 @@
 
     <Button
         android:id="@+id/button_change_nach"
+        style="@style/Theme.Seidlrechner.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -125,12 +133,15 @@
 
     <Button
         android:id="@+id/button_config"
+        style="@style/Theme.Seidlrechner.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="38dp"
         android:layout_marginEnd="15dp"
+        android:backgroundTint="@color/colorAccent"
         android:onClick="toConfig"
         android:text="@string/config"
+        android:textColor="@color/colorBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

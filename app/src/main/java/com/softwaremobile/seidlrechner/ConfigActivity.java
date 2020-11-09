@@ -16,6 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class ConfigActivity extends AppCompatActivity {
 
@@ -23,29 +26,29 @@ public class ConfigActivity extends AppCompatActivity {
     Button button_add_item;
     LinearLayout linearLayout_items;
     EditText input;
-    HashMap<String, String> einheiten_all;
+    SortedMap<String, String> einheiten_all;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
 
-        einheiten_all = new HashMap<>();
-        einheiten_all.put("0.3f", "Seiterl");
-        einheiten_all.put("0.5f", "Krügerl");
-        einheiten_all.put("2.0f", "Doppler");
+        einheiten_all = new TreeMap<>();
+        einheiten_all.put("0.1f", "Stößchen");
+        einheiten_all.put("1.136f", "Yard");
+        einheiten_all.put("0.227f", "Half Pint");
         einheiten_all.put("0.25f", "Quartl");
+        einheiten_all.put("0.284f", "Ladies' Pint");
+        einheiten_all.put("0.3f", "Seiterl");
+        einheiten_all.put("0.33f", "Kugel");
+        einheiten_all.put("3.6f", "Stübchen");
+        einheiten_all.put("0.5f", "Krügerl");
+        einheiten_all.put("0.568f", "Pint");
+        einheiten_all.put("1.0f", "Liter");
+        einheiten_all.put("1.125f", "Kunigundenmaß");
+        einheiten_all.put("2.0f", "Doppler");
         einheiten_all.put("4.0f", "Doppleliesl");
         einheiten_all.put("5.0f", "Grenadier");
-        einheiten_all.put("0.568f", "Pint");
-        einheiten_all.put("0.227f", "Half Pint");
-        einheiten_all.put("0.33f", "Kugel");
-        einheiten_all.put("1.125f", "Kunigundenmaß");
-        einheiten_all.put("0.284f", "Ladies' Pint");
-        einheiten_all.put("1.0f", "Liter");
-        einheiten_all.put("0.1f", "Stößchen");
-        einheiten_all.put("3.6f", "Stübchen");
-        einheiten_all.put("1.136f", "Yard");
 
         SharedPreferences prefs = getSharedPreferences("Bier_all", Context.MODE_PRIVATE);
         if (!prefs.contains("0.3f")) mapIntoSp(einheiten_all);
@@ -55,7 +58,6 @@ public class ConfigActivity extends AppCompatActivity {
         linearLayout_items = findViewById(R.id.linearlayout_items);
 
         for (final HashMap.Entry<String, String> entry : map.entrySet()) {
-
             View item_view = getLayoutInflater().inflate(R.layout.bierliste_item, linearLayout_items, false);
             textView_item_einheit = item_view.findViewById(R.id.textView_item_einheit);
             textView_item_name = item_view.findViewById(R.id.textView_item_name);
@@ -64,9 +66,7 @@ public class ConfigActivity extends AppCompatActivity {
             textView_item_name.setText(entry.getValue());
             textView_item_name.setId(generateID(entry.getKey()));
             button_add_item = item_view.findViewById(R.id.button_add_item);
-            button_add_item.setId(10000+generateID(entry.getKey()));
-            System.out.println(button_add_item.getId());
-
+            button_add_item.setId(10000 + generateID(entry.getKey()));
             button_add_item.setTag(R.string.tag_key, entry.getKey());
 
             if (MainActivity.einheiten.containsKey(entry.getKey())) {
@@ -90,7 +90,6 @@ public class ConfigActivity extends AppCompatActivity {
                 }
             });
 
-
             textView_item_name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
@@ -103,7 +102,6 @@ public class ConfigActivity extends AppCompatActivity {
                     input = customLayout.findViewById(R.id.editText_dialog);
                     input.setText(current_value);
                     builder.setView(customLayout);
-
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -119,7 +117,6 @@ public class ConfigActivity extends AppCompatActivity {
                         }
                     });
                     builder.show();
-
                 }
 
             });
@@ -127,7 +124,6 @@ public class ConfigActivity extends AppCompatActivity {
             linearLayout_items.addView(item_view);
         }
     }
-
 
     private int generateID(String value) {
         float f = Float.parseFloat(value);
@@ -142,12 +138,12 @@ public class ConfigActivity extends AppCompatActivity {
         if (Boolean.parseBoolean(v.getTag(R.string.button_active).toString())) {
             System.out.println("key " + key + " " + value);
             editor.remove(String.valueOf(key));
-            Toast.makeText(ConfigActivity.this, ConfigActivity.this.getResources().getString(R.string.removed)+ ": " + value, Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfigActivity.this, ConfigActivity.this.getResources().getString(R.string.removed) + ": " + value, Toast.LENGTH_SHORT).show();
             editor.apply();
             return true;
         } else {
             editor.putString(String.valueOf(key), value);
-            Toast.makeText(ConfigActivity.this, ConfigActivity.this.getResources().getString(R.string.added)+ ": " + value, Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfigActivity.this, ConfigActivity.this.getResources().getString(R.string.added) + ": " + value, Toast.LENGTH_SHORT).show();
             editor.apply();
             return false;
         }
@@ -164,7 +160,7 @@ public class ConfigActivity extends AppCompatActivity {
         editor2.apply();
     }
 
-    public void mapIntoSp(HashMap<String, String> map) {
+    public void mapIntoSp(SortedMap<String, String> map) {
         SharedPreferences prefs = getSharedPreferences("Bier_all", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         for (HashMap.Entry<String, String> entry : map.entrySet()) {
