@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     Iterator<Map.Entry<String, String>> entries;
     Iterator<Map.Entry<String, String>> entries_nach;
     DecimalFormat df = new DecimalFormat("#.##");
+    private long pressedTime;
 
 
     @Override
@@ -166,5 +168,17 @@ public class MainActivity extends AppCompatActivity {
     public void toConfig(View view) {
         Intent i = new Intent(MainActivity.this, ConfigActivity.class);
         startActivity(i);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (pressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finishAffinity();
+        } else {
+            Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+        }
+        pressedTime = System.currentTimeMillis();
     }
 }
