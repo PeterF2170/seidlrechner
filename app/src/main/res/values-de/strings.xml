@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="back_again">erneut auf zurück tippen, um zu beenden</string>
+    <string name="config">Mehr</string>
+    <string name="save">Speichern</string>
+    <string name="calc">rechnen</string>
+    <string name="add">hinzufügen</string>
+    <string name="remove">entfernen</string>
+    <string name="removed">entfernt</string>
+    <string name="added">hinzugefügt</string>
+    <string name="change">ändern</string>
+    <string name="edit_dialog">Umbenennen</string>
+    <string name="cancel_dialog">abbrechen</string>
+
+</resources>

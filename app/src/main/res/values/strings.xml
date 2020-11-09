@@ -1,6 +1,17 @@
 <resources>
-    <string name="app_name">Seidlrechner</string>
-    <string name="tag_key">key</string>
-    <string name="tag_value">value</string>
-    <string name="button_active">button_active</string>
+    <string name="app_name" translatable="false">Seidlrechner</string>
+    <string name="tag_key" translatable="false">key</string>
+    <string name="tag_value" translatable="false">value</string>
+    <string name="button_active" translatable="false">button_active</string>
+    <string name="back_again">Press back again to exit</string>
+    <string name="config">Config</string>
+    <string name="save">Save</string>
+    <string name="calc">Calc</string>
+    <string name="add">add</string>
+    <string name="added">added</string>
+    <string name="removed">removed</string>
+    <string name="remove">remove</string>
+    <string name="change">change</string>
+    <string name="edit_dialog">Edit Unit</string>
+    <string name="cancel_dialog">Cancel</string>
 </resources>

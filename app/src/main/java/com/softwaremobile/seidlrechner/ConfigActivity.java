@@ -24,7 +24,6 @@ public class ConfigActivity extends AppCompatActivity {
     LinearLayout linearLayout_items;
     EditText input;
     HashMap<String, String> einheiten_all;
-    int tv_id_prefix = 0, button_id_prefix = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,21 +70,21 @@ public class ConfigActivity extends AppCompatActivity {
             button_add_item.setTag(R.string.tag_key, entry.getKey());
 
             if (MainActivity.einheiten.containsKey(entry.getKey())) {
-                button_add_item.setText("Remove");
+                button_add_item.setText(R.string.remove);
                 button_add_item.setTag(R.string.button_active, "true");
             } else {
                 button_add_item.setTag(R.string.button_active, "false");
-                button_add_item.setText("add");
+                button_add_item.setText(R.string.add);
             }
             button_add_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Button b = findViewById(v.getId());
                     if (addOrRemoveItem(v, entry.getKey(), entry.getValue())) {
-                        b.setText("add");
+                        b.setText(R.string.add);
                         b.setTag(R.string.button_active, "false");
                     } else {
-                        b.setText("remove");
+                        b.setText(R.string.remove);
                         b.setTag(R.string.button_active, "true");
                     }
                 }
@@ -99,7 +98,7 @@ public class ConfigActivity extends AppCompatActivity {
                     final TextView current_tv = findViewById(v.getId());
                     final String current_value = current_tv.getText().toString(); //Seidl
                     AlertDialog.Builder builder = new AlertDialog.Builder(ConfigActivity.this);
-                    builder.setTitle("edit unit");
+                    builder.setTitle(R.string.edit_dialog);
                     View customLayout = getLayoutInflater().inflate(R.layout.dialog, null);
                     input = customLayout.findViewById(R.id.editText_dialog);
                     input.setText(current_value);
@@ -113,7 +112,7 @@ public class ConfigActivity extends AppCompatActivity {
                             current_tv.setText(input.getText().toString());
                         }
                     });
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton(R.string.cancel_dialog, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
@@ -143,12 +142,12 @@ public class ConfigActivity extends AppCompatActivity {
         if (Boolean.parseBoolean(v.getTag(R.string.button_active).toString())) {
             System.out.println("key " + key + " " + value);
             editor.remove(String.valueOf(key));
-            Toast.makeText(ConfigActivity.this, "removed " + value, Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfigActivity.this, ConfigActivity.this.getResources().getString(R.string.removed)+ ": " + value, Toast.LENGTH_SHORT).show();
             editor.apply();
             return true;
         } else {
             editor.putString(String.valueOf(key), value);
-            Toast.makeText(ConfigActivity.this, "added " + value, Toast.LENGTH_SHORT).show();
+            Toast.makeText(ConfigActivity.this, ConfigActivity.this.getResources().getString(R.string.added)+ ": " + value, Toast.LENGTH_SHORT).show();
             editor.apply();
             return false;
         }
