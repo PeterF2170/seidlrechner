@@ -24,6 +24,7 @@ public class ConfigActivity extends AppCompatActivity {
     LinearLayout linearLayout_items;
     EditText input;
     HashMap<String, String> einheiten_all;
+    int tv_id_prefix = 0, button_id_prefix = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class ConfigActivity extends AppCompatActivity {
         einheiten_all.put("1.136f", "Yard");
 
         SharedPreferences prefs = getSharedPreferences("Bier_all", Context.MODE_PRIVATE);
-        if(!prefs.contains("0.3f")) mapIntoSp(einheiten_all);;
+        if (!prefs.contains("0.3f")) mapIntoSp(einheiten_all);
 
         HashMap<String, String> map = getAll();
         System.out.println(map);
@@ -59,10 +60,14 @@ public class ConfigActivity extends AppCompatActivity {
             View item_view = getLayoutInflater().inflate(R.layout.bierliste_item, linearLayout_items, false);
             textView_item_einheit = item_view.findViewById(R.id.textView_item_einheit);
             textView_item_name = item_view.findViewById(R.id.textView_item_name);
-            textView_item_name.setText(entry.getValue());
-            button_add_item = item_view.findViewById(R.id.button_add_item);
             textView_item_name.setTag(R.string.tag_value, entry.getValue());
             textView_item_name.setTag(R.string.tag_key, entry.getKey());
+            textView_item_name.setText(entry.getValue());
+            textView_item_name.setId(generateID(entry.getKey()));
+            button_add_item = item_view.findViewById(R.id.button_add_item);
+            button_add_item.setId(10000+generateID(entry.getKey()));
+            System.out.println(button_add_item.getId());
+
             button_add_item.setTag(R.string.tag_key, entry.getKey());
 
             if (MainActivity.einheiten.containsKey(entry.getKey())) {
@@ -75,11 +80,13 @@ public class ConfigActivity extends AppCompatActivity {
             button_add_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Button b = findViewById(v.getId());
                     if (addOrRemoveItem(v, entry.getKey(), entry.getValue())) {
-                        button_add_item.setText("add");
-
+                        b.setText("add");
+                        b.setTag(R.string.button_active, "false");
                     } else {
-                        button_add_item.setText("remove");
+                        b.setText("remove");
+                        b.setTag(R.string.button_active, "true");
                     }
                 }
             });
@@ -89,10 +96,10 @@ public class ConfigActivity extends AppCompatActivity {
                 @Override
                 public void onClick(final View v) {
                     final String current_tag = (String) v.getTag(R.string.tag_key);     //0.3
-                    final String current_value = (String) v.getTag(R.string.tag_value); //Seidl
+                    final TextView current_tv = findViewById(v.getId());
+                    final String current_value = current_tv.getText().toString(); //Seidl
                     AlertDialog.Builder builder = new AlertDialog.Builder(ConfigActivity.this);
                     builder.setTitle("edit unit");
-
                     View customLayout = getLayoutInflater().inflate(R.layout.dialog, null);
                     input = customLayout.findViewById(R.id.editText_dialog);
                     input.setText(current_value);
@@ -103,6 +110,7 @@ public class ConfigActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             einheiten_all.replace(current_tag, input.getText().toString());
                             updateSp(current_tag, input.getText().toString());
+                            current_tv.setText(input.getText().toString());
                         }
                     });
                     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -112,12 +120,20 @@ public class ConfigActivity extends AppCompatActivity {
                         }
                     });
                     builder.show();
+
                 }
 
             });
             textView_item_einheit.setText(String.valueOf(Float.parseFloat(entry.getKey())) + " L");
             linearLayout_items.addView(item_view);
         }
+    }
+
+
+    private int generateID(String value) {
+        float f = Float.parseFloat(value);
+        String s = String.valueOf(f).replace(".", "");
+        return Integer.parseInt(s);
     }
 
     public boolean addOrRemoveItem(View v, String key, String value) {
