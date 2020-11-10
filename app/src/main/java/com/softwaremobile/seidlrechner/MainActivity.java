@@ -150,16 +150,6 @@ public class MainActivity extends AppCompatActivity {
         else return 0.0f;
     }
 
-
-    public void mapIntoSp(HashMap<Float, String> map) {
-        SharedPreferences prefs = getSharedPreferences("Bier", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        for (HashMap.Entry<Float, String> entry : map.entrySet()) {
-            editor.putString(String.valueOf(entry.getKey()), entry.getValue());
-        }
-        editor.apply();
-    }
-
     public HashMap<String, String> getAll() {
         SharedPreferences prefs = getSharedPreferences("Bier", Context.MODE_PRIVATE);
         return (HashMap<String, String>) new HashMap(prefs.getAll());
