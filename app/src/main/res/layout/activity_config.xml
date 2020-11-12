@@ -6,10 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".ConfigActivity">
 
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="368dp"
+        android:onClick="showDialog"
+        android:text="NAV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
         android:id="@+id/scrollview_items"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,11 +33,10 @@
             android:id="@+id/linearlayout_items"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/button_save"
-                style="@style/Theme.Seidlrechner.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="save"

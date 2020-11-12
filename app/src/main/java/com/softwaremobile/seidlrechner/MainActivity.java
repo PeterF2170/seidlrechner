@@ -12,13 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     TextView textView_von, textView_nach;
     EditText edit_von, edit_nach;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     Iterator<Map.Entry<String, String>> entries_nach;
     DecimalFormat df = new DecimalFormat("#.##");
     private long pressedTime;
+
 
 
     @Override
@@ -170,4 +173,6 @@ public class MainActivity extends AppCompatActivity {
         }
         pressedTime = System.currentTimeMillis();
     }
+
+
 }

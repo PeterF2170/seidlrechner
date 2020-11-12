@@ -20,7 +20,7 @@ import java.util.Iterator;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-public class ConfigActivity extends AppCompatActivity {
+public class ConfigActivity extends BaseActivity {
 
     TextView textView_item_name, textView_item_einheit;
     Button button_add_item;
