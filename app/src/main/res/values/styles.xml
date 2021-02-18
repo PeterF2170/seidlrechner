@@ -19,5 +19,4 @@
     <style name="Theme.Seidlrechner.EditText" parent="TextAppearance.AppCompat.Button">
         <item name="android:backgroundTint">@color/colorAccent</item>
     </style>
-
 </resources>

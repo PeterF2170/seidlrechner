@@ -3,13 +3,13 @@
     <string name="back_again">erneut auf zurück tippen, um zu beenden</string>
     <string name="config">Mehr</string>
     <string name="save">Speichern</string>
-    <string name="calc">rechnen</string>
-    <string name="add">hinzufügen</string>
-    <string name="remove">entfernen</string>
-    <string name="removed">entfernt</string>
-    <string name="added">hinzugefügt</string>
-    <string name="change">ändern</string>
+    <string name="calc">Rechnen</string>
+    <string name="add">Hinzufügen</string>
+    <string name="remove">Entfernen</string>
+    <string name="removed">Entfernt</string>
+    <string name="added">Hinzugefügt</string>
+    <string name="change">Ändern</string>
     <string name="edit_dialog">Umbenennen</string>
-    <string name="cancel_dialog">abbrechen</string>
+    <string name="cancel_dialog">Abbrechen</string>
 
 </resources>

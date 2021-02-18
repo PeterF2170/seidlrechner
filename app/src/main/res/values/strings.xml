@@ -1,17 +1,20 @@
 <resources>
-    <string name="app_name" translatable="false">Seidlrechner</string>
+    <string name="app_name" translatable="false">seidlrechner</string>
+    <string name="app_syllable1" translatable="false">seidl</string>
+    <string name="app_syllable2" translatable="false">rechner</string>
     <string name="tag_key" translatable="false">key</string>
     <string name="tag_value" translatable="false">value</string>
     <string name="button_active" translatable="false">button_active</string>
     <string name="back_again">Press back again to exit</string>
-    <string name="config">Config</string>
-    <string name="save">Save</string>
-    <string name="calc">Calc</string>
+    <string name="config">config</string>
+    <string name="save">save</string>
+    <string name="calc">calculate</string>
     <string name="add">add</string>
     <string name="added">added</string>
     <string name="removed">removed</string>
     <string name="remove">remove</string>
     <string name="change">change</string>
     <string name="edit_dialog">Edit Unit</string>
-    <string name="cancel_dialog">Cancel</string>
+    <string name="cancel_dialog">cancel</string>
+
 </resources>

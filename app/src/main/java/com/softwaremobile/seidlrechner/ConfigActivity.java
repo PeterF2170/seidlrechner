@@ -9,12 +9,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.SortedMap;
@@ -138,12 +141,12 @@ public class ConfigActivity extends AppCompatActivity {
         if (Boolean.parseBoolean(v.getTag(R.string.button_active).toString())) {
             System.out.println("key " + key + " " + value);
             editor.remove(String.valueOf(key));
-            Toast.makeText(ConfigActivity.this, ConfigActivity.this.getResources().getString(R.string.removed) + ": " + value, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), ConfigActivity.this.getResources().getString(R.string.removed) + ": " + value, Toast.LENGTH_SHORT).show();
             editor.apply();
             return true;
         } else {
             editor.putString(String.valueOf(key), value);
-            Toast.makeText(ConfigActivity.this, ConfigActivity.this.getResources().getString(R.string.added) + ": " + value, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), ConfigActivity.this.getResources().getString(R.string.added) + ": " + value, Toast.LENGTH_SHORT).show();
             editor.apply();
             return false;
         }

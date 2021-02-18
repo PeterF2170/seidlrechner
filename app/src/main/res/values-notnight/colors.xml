@@ -2,12 +2,12 @@
 <resources>
     <color name="colorOrange">#FF8300</color>
     <color name="colorPrimary">#424242</color>
-    <color name="colorPrimaryDark">#1b1b1b</color>
-    <color name="colorPrimaryLight">#000</color>
+    <color name="colorPrimaryDark">#fff</color>
+    <color name="colorPrimaryLight">#fff</color>
     <color name="colorAccent">#ffee58</color>
     <color name="colorAccentDark">#c9bc1f</color>
-    <color name="colorBackground">#1b1b1b</color>
+    <color name="colorBackground">#fff</color>
     <color name="colorText">#f5f5f5</color>
 
-    <color name="listColor">#fff</color>
+    <color name="listColor">#000</color>
 </resources>

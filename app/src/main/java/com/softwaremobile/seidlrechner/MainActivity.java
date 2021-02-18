@@ -6,8 +6,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView textView_von, textView_nach;
     EditText edit_von, edit_nach;
-    Button button_calc, button_plus, button_minus, button_change, button_change_nach;
+    Button button_calc;
+    ImageButton button_plus, button_minus, button_change, button_change_nach;
     float von = 1.0f, total_lt = 0.0f;
     String einheit, einheit_nach;
     public static HashMap<String, String> einheiten;
@@ -43,16 +48,30 @@ public class MainActivity extends AppCompatActivity {
         button_calc = findViewById(R.id.button_calc);
         button_plus = findViewById(R.id.button_plus);
         button_minus = findViewById(R.id.button_minus);
+        /*
         button_change = findViewById(R.id.button_change);
         button_change_nach = findViewById(R.id.button_change_nach);
         textView_von = findViewById(R.id.textView_von);
         textView_nach = findViewById(R.id.textView_nach);
+        */
         edit_nach.setText(String.valueOf(einheit_nach));
+        Spinner mySpinner = findViewById(R.id.spinner);
 
         einheiten = getAll();
         if (einheiten.isEmpty()) {
             einheiten.put("1.0f", "Liter");
         }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item);
+        einheiten.forEach((k, v) -> {
+            adapter.add(v);
+        });
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown);
+        mySpinner.setAdapter(adapter);
+
+        Spinner mySpinner2 = findViewById(R.id.spinner2);
+        mySpinner2.setAdapter(adapter);
+        mySpinner2.setSelection(adapter.getPosition("Seiterl"));
 
         entries = einheiten.entrySet().iterator();
         Map.Entry<String, String> entry = entries.next();
@@ -62,45 +81,90 @@ public class MainActivity extends AppCompatActivity {
         Map.Entry<String, String> entry_nach = entries_nach.next();
         einheit_nach = entry_nach.getKey();
 
-        textView_nach.setText(einheiten.get(einheit_nach));
-        textView_von.setText(einheiten.get(einheit));
+        //textView_nach.setText(einheiten.get(einheit_nach));
+        //textView_von.setText(einheiten.get(einheit));
 
         calc();
 
-        button_calc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calc();
+        button_calc.setOnClickListener(v -> calc());
+
+        button_plus.setOnClickListener(v -> {
+            if (von == 0.0f) {
+                button_minus.setEnabled(true);
             }
+            von = getVon();
+            von += 1;
+            edit_von.setText(String.valueOf(von));
+            calc();
         });
 
-        button_plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (von == 0.0f) {
-                    button_minus.setEnabled(true);
+        button_minus.setOnClickListener(v -> {
+            von = getVon();
+            if (von <= 1.0) {
+                button_minus.setEnabled(false);
+            }
+            von -= 1.0f;
+            total_lt -= Float.parseFloat(einheit);
+            edit_von.setText(String.valueOf(von));
+            calc();
+        });
+
+        mySpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        if (entries_nach.hasNext()) {
+                            String item = (String) adapterView.getItemAtPosition(i);
+                            einheiten.forEach((k, v) -> {
+                                if (v.equals(item)) {
+                                    einheit = k;
+                                }
+                            });
+                        } else {
+                            String item = (String) adapterView.getItemAtPosition(i);
+                            einheiten.forEach((k, v) -> {
+                                if (v.equals(item)) {
+                                    einheit = k;
+                                }
+                            });
+                        }
+                        //calc()
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    }
                 }
-                von = getVon();
-                von += 1;
-                edit_von.setText(String.valueOf(von));
-                calc();
-            }
-        });
+        );
 
-        button_minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                von = getVon();
-                if (von <= 1.0) {
-                    button_minus.setEnabled(false);
+        mySpinner2.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        if (entries_nach.hasNext()) {
+                            String item = (String) adapterView.getItemAtPosition(i);
+                            einheiten.forEach((k, v) -> {
+                                if (v.equals(item)) {
+                                    einheit_nach = k;
+                                }
+                            });
+                        } else {
+                            String item = (String) adapterView.getItemAtPosition(i);
+                            einheiten.forEach((k, v) -> {
+                                if (v.equals(item)) {
+                                    einheit_nach = k;
+                                }
+                            });
+                        }
+                        //calc()
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    }
                 }
-                von -= 1.0f;
-                total_lt -= Float.parseFloat(einheit);
-                edit_von.setText(String.valueOf(von));
-                calc();
-            }
-        });
-
+        );
+        /*
         button_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
                     textView_von.setText(einheiten.get(String.valueOf(einheit)));
                 }
                 calc();
-
             }
         });
 
@@ -133,9 +196,10 @@ public class MainActivity extends AppCompatActivity {
                     textView_nach.setText(einheiten.get(String.valueOf(einheit_nach)));
                 }
                 calc();
-
             }
         });
+
+         */
     }
 
     public void calc() {
