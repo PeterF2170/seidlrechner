@@ -9,5 +9,12 @@
     <EditText
         android:id="@+id/editText_dialog"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorOrange"
+        android:textColor="@color/listColor"
+        android:textColorHighlight="@color/colorOrange"
+        android:textColorHint="@color/colorOrange"
+        android:textColorLink="@color/colorOrange"
+        android:textCursorDrawable="@color/colorOrange"
+        />
 </LinearLayout>

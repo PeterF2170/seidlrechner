@@ -14,7 +14,7 @@
     <string name="removed">removed</string>
     <string name="remove">remove</string>
     <string name="change">change</string>
-    <string name="edit_dialog">Edit Unit</string>
+    <string name="edit_dialog">rename</string>
     <string name="cancel_dialog">cancel</string>
 
 </resources>
